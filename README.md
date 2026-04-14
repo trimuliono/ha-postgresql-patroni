@@ -1,9 +1,8 @@
 # HA PostgreSQL Cluster — Patroni + etcd + HAProxy + Keepalived
 
-> **Project:** Task 30 — Assessment Failover Hasura  
+> **Project:** Assessment Failover Hasura  
 > **OS:** Rocky Linux 9  
 > **Stack:** PostgreSQL 16, Patroni, etcd v3.5.17, HAProxy, Keepalived  
-> **Status:** 68% — Testing HA in progress
 
 Repo ini mendokumentasikan proses setup, konfigurasi, dan testing High Availability (HA) PostgreSQL cluster menggunakan Patroni sebagai cluster manager, etcd sebagai distributed configuration store, HAProxy sebagai load balancer, dan Keepalived untuk floating IP.
 
@@ -111,26 +110,6 @@ ha-postgresql-patroni/
     ├── keepalived/keepalived.conf.example
     └── hasura/deployment.yaml.example
 ```
-
----
-
-## Timeline Project
-
-| Tanggal | Task |
-|---|---|
-| 17/03/2026 | Pengecekan spesifikasi server |
-| 18/03/2026 | Pengecekan security server |
-| 02/04/2026 | Link pengecekan |
-| 06/04/2026 | Instalasi dan konfigurasi etcd |
-| 07/04/2026 | Instalasi dan konfigurasi Patroni |
-| 08/04/2026 | Instalasi dan konfigurasi HAProxy |
-| 09/04/2026 | Instalasi dan konfigurasi Keepalived |
-| 10/04/2026 | Adjustment konfigurasi HAProxy & Keepalived |
-| 13/04/2026 | ✅ Testing cluster PostgreSQL |
-| 14/04/2026 | Skenario testing HA |
-| 15/04/2026 | Membuat deployment Kubernetes Hasura |
-| 16/04/2026 | Testing HA Hasura |
-| 17/04/2026 | Dokumentasi |
 
 ---
 
