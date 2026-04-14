@@ -1,6 +1,5 @@
 # HA PostgreSQL Cluster — Patroni + etcd + HAProxy + Keepalived
 
-> **Project:** Assessment Failover Hasura  
 > **OS:** Rocky Linux 9  
 > **Stack:** PostgreSQL 16, Patroni, etcd v3.5.17, HAProxy, Keepalived  
 
