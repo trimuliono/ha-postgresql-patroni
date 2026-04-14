@@ -92,23 +92,16 @@ ha-postgresql-patroni/
 │   │
 │   └── runbooks/                      # Panduan operasional
 │       ├── failover-manual.md
-│       ├── add-new-node.md
 │       └── troubleshooting.md
 │
 ├── setup/
 │   └── ha-postgresql-patroni-rocky9.md   # Dokumentasi instalasi lengkap
 │
-├── testing/
-│   ├── test-cluster-postgresql.md     # Hasil testing cluster
-│   ├── test-ha-scenarios.md           # Skenario & hasil testing HA
-│   └── test-ha-hasura.md              # Testing HA dari sisi Hasura
-│
-└── config/                            # Template konfigurasi
-    ├── patroni/16-main.yml.example
-    ├── etcd/etcd.conf.example
-    ├── haproxy/haproxy.cfg.example
-    ├── keepalived/keepalived.conf.example
-    └── hasura/deployment.yaml.example
+└── testing/
+    ├── test-cluster-postgresql.md     # Hasil testing cluster
+    ├── test-ha-scenarios.md           # Skenario & hasil testing HA
+    └── test-ha-hasura.md              # Testing HA dari sisi Hasura
+
 ```
 
 ---
