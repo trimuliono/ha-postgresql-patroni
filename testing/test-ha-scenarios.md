@@ -1,7 +1,6 @@
 # Testing HA — Skenario Failover PostgreSQL
 
-**Tanggal:** 14 April 2026  
-**Tester:** -  
+
 **Environment:** confluent-1, confluent-2, confluent-3  
 **Status:** 🔄 PLANNED
 
@@ -67,14 +66,17 @@ patronictl -c /etc/patroni/16-main.yml list
 - Saat confluent-1 hidup kembali, otomatis jadi Replica
 - Data tidak hilang
 
-**Actual Result:** *(diisi setelah testing)*
+**Actual Result:** 
 
 | Yang Diukur | Expected | Actual |
 |---|---|---|
 | Waktu election | 30-60 detik | - |
-| Leader baru | confluent-2 atau confluent-3 | - |
-| Koneksi setelah failover | Berhasil | - |
+| Leader baru | confluent-2 atau confluent-3 | confluent-3 |
+| Koneksi setelah failover | Berhasil | Berhasil |
 | confluent-1 kembali | Jadi Replica | - |
+
+<img width="1213" height="456" alt="image" src="https://github.com/user-attachments/assets/d78e2ce8-07f7-40e4-b4f5-2b17a2225cc2" />
+
 
 ---
 
