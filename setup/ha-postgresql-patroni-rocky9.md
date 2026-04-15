@@ -1107,6 +1107,8 @@ sudo systemctl start patroni@16-main
 patronictl -c /etc/patroni/16-main.yml list
 ```
 <img width="1213" height="456" alt="image" src="https://github.com/user-attachments/assets/79d2d60c-b978-4fda-b300-491945172e9f" />
+<img width="908" height="237" alt="image" src="https://github.com/user-attachments/assets/3d4a5df7-0ac2-447d-a882-26cedfb3fba5" />
+<img width="1199" height="268" alt="image" src="https://github.com/user-attachments/assets/4c8c6976-0063-4c26-a959-8d44c7b4c8d8" />
 
 
 
