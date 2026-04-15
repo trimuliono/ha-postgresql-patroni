@@ -1,7 +1,6 @@
 # Testing HA — Hasura dengan PostgreSQL Cluster
 
-**Tanggal:** 16 April 2026  
-**Tester:** -  
+
 **Environment:** Kubernetes (Hasura) + confluent-1/2/3 (PostgreSQL)  
 **Status:** 🔄 PLANNED
 
