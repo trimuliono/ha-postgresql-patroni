@@ -1111,19 +1111,19 @@ patronictl -c /etc/patroni/16-main.yml list
 <img width="1199" height="268" alt="image" src="https://github.com/user-attachments/assets/4c8c6976-0063-4c26-a959-8d44c7b4c8d8" />
 
 
-
 ### 8.7 Test failover manual (switchover)
 
 ```bash
 # Switchover ke node tertentu
 patronictl -c /etc/patroni/16-main.yml switchover \
-  --master confluent-1 \
+  --leader confluent-3 \
   --candidate confluent-2 \
   --force
 
 # Verifikasi
 patronictl -c /etc/patroni/16-main.yml list
 ```
+<img width="1672" height="638" alt="image" src="https://github.com/user-attachments/assets/b26faf95-1bbc-4eff-9562-74c3c211f0e2" />
 
 ### 8.8 Test Keepalived failover
 
@@ -1143,6 +1143,9 @@ ip a show ens32 | grep 10.100.13.248
 sudo systemctl start keepalived
 # VIP kembali ke confluent-1 (karena priority lebih tinggi)
 ```
+<img width="754" height="146" alt="image" src="https://github.com/user-attachments/assets/908067ed-e2d2-4a5e-8d03-832fae801bae" />
+<img width="788" height="114" alt="image" src="https://github.com/user-attachments/assets/ac139164-8a2a-4f1c-92fe-1d7a04a5dd67" />
+<img width="778" height="203" alt="image" src="https://github.com/user-attachments/assets/6af922db-48cb-4383-b6fa-ed931024dd01" />
 
 ### 8.9 Cek HAProxy stats
 
@@ -1151,6 +1154,7 @@ Buka browser dan akses:
 ```
 http://10.100.13.248:7000/
 ```
+<img width="1901" height="949" alt="image" src="https://github.com/user-attachments/assets/ae52bf06-cbda-41e5-84ab-4a9098be9d5c" />
 
 Atau via curl:
 
