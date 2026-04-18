@@ -1,0 +1,24 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: hasura-chm-schema-tri
+  namespace: tri
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - hasura-chm-schema-tri.alldataint.com
+      secretName: wildcard-tls
+  rules:
+    - host: hasura-chm-schema-tri.alldataint.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hasura-chm-schema-tri
+                port:
+                  number: 8080

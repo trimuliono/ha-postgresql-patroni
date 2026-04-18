@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hasura-chm-schema-tri
+  namespace: tri
+  labels:
+    app: hasura-chm-schema-tri
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: http
+  selector:
+    app: hasura-chm-schema-tri
+  type: ClusterIP
