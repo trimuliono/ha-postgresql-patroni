@@ -1,0 +1,69 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hasura-chm-tri
+  namespace: tri
+  labels:
+    app: hasura-chm-tri
+    hasuraService: custom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hasura-chm-tri
+  template:
+    metadata:
+      labels:
+        app: hasura-chm-tri
+    spec:
+      containers:
+        - name: hasura-chm-tri
+          image: hasura/graphql-engine:v2.46.0
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: HASURA_GRAPHQL_METADATA_DATABASE_URL
+              value: "postgresql://postgres:YourSuperuserPassword@10.100.13.248:5000/hasura_chm_metadata_k8s"
+            - name: HASURA_GRAPHQL_DATABASE_URL
+              value: "postgresql://postgres:YourSuperuserPassword@10.100.13.248:5000/hasura_datasource"
+            - name: HASURA_GRAPHQL_ENABLE_CONSOLE
+              value: "true"
+            - name: HASURA_GRAPHQL_DEV_MODE
+              value: "true"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+            periodSeconds: 15
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+            periodSeconds: 15
+            successThreshold: 1
+            failureThreshold: 3
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
