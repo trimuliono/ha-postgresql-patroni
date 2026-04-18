@@ -1,9 +1,9 @@
 # HA PostgreSQL Cluster — Patroni + etcd + HAProxy + Keepalived
 
 > **OS:** Rocky Linux 9  
-> **Stack:** PostgreSQL 16, Patroni, etcd v3.5.17, HAProxy, Keepalived  
+> **Stack:** PostgreSQL 16, Patroni, etcd v3.5.17, HAProxy, Keepalived, Hasura v2.46.0, Kubernetes  
 
-Repo ini mendokumentasikan proses setup, konfigurasi, dan testing High Availability (HA) PostgreSQL cluster menggunakan Patroni sebagai cluster manager, etcd sebagai distributed configuration store, HAProxy sebagai load balancer, dan Keepalived untuk floating IP.
+Repo ini mendokumentasikan proses setup, konfigurasi, dan testing High Availability (HA) PostgreSQL cluster menggunakan Patroni sebagai cluster manager, etcd sebagai distributed configuration store, HAProxy sebagai load balancer, dan Keepalived untuk floating IP. Termasuk deployment Hasura di Kubernetes dan testing HA menggunakan Apache JMeter.
 
 ---
 
@@ -96,12 +96,37 @@ ha-postgresql-patroni/
 ├── setup/
 │   └── ha-postgresql-patroni-rocky9.md   # Dokumentasi instalasi lengkap
 │
+├── kubernetes/                        # Manifest K8s untuk Hasura
+│   ├── README.md
+│   ├── hasura-chm-tri/
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   └── ingress.yaml
+│   └── hasura-chm-schema-tri/
+│       ├── deployment.yaml
+│       ├── service.yaml
+│       └── ingress.yaml
+│
 └── testing/
-    ├── test-cluster-postgresql.md     # Hasil testing cluster
-    ├── test-ha-scenarios.md           # Skenario & hasil testing HA
-    └── test-ha-hasura.md              # Testing HA dari sisi Hasura
-
+    ├── test-cluster-postgresql.md     # Hasil testing cluster (✅ DONE)
+    ├── test-ha-scenarios.md           # Skenario & hasil testing HA (✅ DONE)
+    └── test-ha-hasura.md              # Testing HA dari sisi Hasura (✅ DONE)
 ```
+
+---
+
+## Hasil Testing
+
+| Test | Status | Catatan |
+|---|---|---|
+| Cluster PostgreSQL normal | ✅ PASS | 3 node running, Lag = 0 |
+| Failover otomatis (1 node mati) | ✅ PASS | Election ~45 detik, confluent-3 jadi leader |
+| Switchover manual | ✅ PASS | ~10 detik, terkontrol |
+| Keepalived VIP failover | ✅ PASS | VIP pindah ~2 detik |
+| Hasura HA — kondisi normal | ✅ PASS | Error 0%, avg ~62ms |
+| Hasura HA — 1 node mati | ✅ PASS | Error ~30 detik, recover otomatis |
+| Hasura HA — semua node mati | ✅ PASS (expected) | Error 100%, CrashLoopBackOff |
+| Hasura HA — recovery | ✅ PASS | Recover otomatis tanpa restart manual |
 
 ---
 
@@ -114,3 +139,4 @@ ha-postgresql-patroni/
 | HAProxy | https://www.haproxy.org |
 | PostgreSQL 16 | https://www.postgresql.org/docs/16/ |
 | Rocky Linux 9 | https://docs.rockylinux.org |
+| Hasura | https://hasura.io/docs |
