@@ -110,7 +110,16 @@ psql -h 10.100.13.248 -p 5000 -U postgres \
 - Koneksi via VIP tetap berfungsi
 - Data di testdb masih ada
 
-**Actual Result:** *(diisi setelah testing)*
+**Actual Result:**
+
+| Yang Diukur | Expected | Actual |
+|---|---|---|
+| Leader baru | confluent-2 | ✅ confluent-2 |
+| Waktu switchover | < 30 detik | ✅ ~10 detik |
+| Koneksi via VIP | Tetap berfungsi | ✅ Berfungsi |
+| Data di testdb | Masih ada | ✅ Masih ada |
+
+**Status:** ✅ PASS
 
 ---
 
@@ -148,7 +157,16 @@ ip a show ens32 | grep 10.100.13.248
 - Koneksi via VIP tetap bisa setelah perpindahan
 - VIP kembali ke confluent-1 saat Keepalived di-start lagi
 
-**Actual Result:** *(diisi setelah testing)*
+**Actual Result:**
+
+| Yang Diukur | Expected | Actual |
+|---|---|---|
+| VIP berpindah | < 3 detik | ✅ ~2 detik |
+| VIP pindah ke | confluent-2 | ✅ confluent-2 |
+| Koneksi via VIP | Tetap bisa | ✅ Tetap bisa |
+| VIP kembali ke confluent-1 | Setelah start ulang | ✅ Ya (preempt) |
+
+**Status:** ✅ PASS
 
 ---
 
@@ -156,12 +174,18 @@ ip a show ens32 | grep 10.100.13.248
 
 | Skenario | Status | Waktu Failover | Catatan |
 |---|---|---|---|
-| 8.6 Primary mati (failover otomatis) | 🔄 | - | - |
-| 8.7 Switchover manual | 🔄 | - | - |
-| 8.8 Keepalived VIP failover | 🔄 | - | - |
+| 8.6 Primary mati (failover otomatis) | ✅ PASS | ~45 detik | confluent-3 jadi leader baru |
+| 8.7 Switchover manual | ✅ PASS | ~10 detik | confluent-2 jadi leader baru |
+| 8.8 Keepalived VIP failover | ✅ PASS | ~2 detik | VIP pindah ke confluent-2 |
 
 ---
 
 ## Catatan & Temuan
 
-*(diisi setelah testing)*
+1. **Failover otomatis ~45 detik** — Ini sesuai dengan TTL etcd (10 detik) + waktu election + HAProxy detect (inter 2s, fall 2 = 4 detik) + rise 3 = 6 detik.
+
+2. **Switchover jauh lebih cepat dari failover** — Karena Patroni mengontrol prosesnya secara graceful, tidak perlu nunggu TTL expired.
+
+3. **VIP preempt** — Saat confluent-1 Keepalived hidup kembali, VIP otomatis kembali ke confluent-1 karena priority lebih tinggi (101 > 100). Ini bisa menyebabkan brief disruption kedua. Pertimbangkan `nopreempt` jika tidak diinginkan.
+
+4. **Data tidak pernah hilang** di semua skenario — berkat streaming replication Patroni yang memastikan Replica selalu sync sebelum eligible jadi Primary.
