@@ -211,12 +211,12 @@ Kondisi saat cluster postgresql down:
 
 <img width="1294" height="256" alt="image" src="https://github.com/user-attachments/assets/65924da7-10ef-410f-8425-5e40be69b0fa" />
 
-Grafik transaksi:
-<img width="935" height="455" alt="Response Time Graph - Testing CHM" src="https://github.com/user-attachments/assets/11a13d68-a4cd-41d8-82f5-4c7ba5619866" />
-
 ## Analisis Response Time Graph — Simulasi Failover PostgreSQL (Hasura Metadata)
 
 Grafik di bawah merekam keseluruhan sesi testing dari **17:05 hingga 18:21** (~76 menit), mencakup seluruh siklus: ramp-up, cluster degradasi bertahap hingga down, lalu recovery.
+
+Grafik transaksi:
+<img width="935" height="455" alt="Response Time Graph - Testing CHM" src="https://github.com/user-attachments/assets/11a13d68-a4cd-41d8-82f5-4c7ba5619866" />
 
 <img width="752" height="576" alt="image" src="https://github.com/user-attachments/assets/bf6a6190-e5c1-4491-a12b-61dffbc6f571" />
 
