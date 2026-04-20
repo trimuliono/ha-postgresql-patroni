@@ -197,6 +197,23 @@ patronictl -c /etc/patroni/16-main.yml list
 **Status:** ✅ PASS
 
 ---
+Utilization saat tidak ada transaksi:
+<img width="1600" height="722" alt="image" src="https://github.com/user-attachments/assets/5685c0e1-f35f-4a44-997c-47af1e6693a3" />
+
+Utilization saat load testing:
+<img width="1600" height="854" alt="image" src="https://github.com/user-attachments/assets/8e4d9218-f9f4-40d4-a8b2-0c214aa2943b" />
+
+Kondisi saat cluster postgresql down:
+<img width="1600" height="670" alt="image" src="https://github.com/user-attachments/assets/d45e9698-1a84-4403-97c3-09b15b68eac8" />
+<img width="1600" height="847" alt="image" src="https://github.com/user-attachments/assets/ebc56806-c9dc-4116-8a01-8d137f19542c" />
+
+<img width="1297" height="739" alt="image" src="https://github.com/user-attachments/assets/926ad1c7-6243-4abf-8109-c0403d3615c0" />
+
+<img width="1294" height="256" alt="image" src="https://github.com/user-attachments/assets/65924da7-10ef-410f-8425-5e40be69b0fa" />
+
+Grafik transaksi:
+<img width="935" height="455" alt="Response Time Graph - Testing CHM" src="https://github.com/user-attachments/assets/11a13d68-a4cd-41d8-82f5-4c7ba5619866" />
+
 
 ## Ringkasan
 
